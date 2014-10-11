@@ -1,8 +1,8 @@
 package com.alankehoe.controllers.api;
 
-import com.alankehoe.model.exceptions.RecordNotFoundException;
-import com.alankehoe.model.exceptions.UnprocessableEntityException;
-import com.alankehoe.services.UserService;
+import com.alankehoe.exceptions.RecordNotFoundException;
+import com.alankehoe.exceptions.UnprocessableEntityException;
+import com.alankehoe.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

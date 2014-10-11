@@ -1,8 +1,8 @@
 package com.alankehoe.controllers.api;
 
-import com.alankehoe.model.dto.User;
-import com.alankehoe.model.exceptions.RecordNotFoundException;
-import com.alankehoe.model.exceptions.UnprocessableEntityException;
+import com.alankehoe.model.dto.UserDTO;
+import com.alankehoe.exceptions.RecordNotFoundException;
+import com.alankehoe.exceptions.UnprocessableEntityException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class UsersController extends BaseController {
   @RequestMapping(value = "/users", method = RequestMethod.GET, headers = "Accept=application/json")
   public
   @ResponseBody
-  List<User> index() throws RecordNotFoundException {
+  List<UserDTO> index() throws RecordNotFoundException {
     try {
       return userService.all();
     } catch (RecordNotFoundException e) {
@@ -38,7 +38,7 @@ public class UsersController extends BaseController {
   @RequestMapping(value = "/users/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
   public
   @ResponseBody
-  User show(@PathVariable("id") int id) throws RecordNotFoundException {
+  UserDTO show(@PathVariable("id") int id) throws RecordNotFoundException {
     try {
       return userService.find(id);
     } catch (RecordNotFoundException e) {
@@ -50,9 +50,9 @@ public class UsersController extends BaseController {
   @RequestMapping(value = "/users", method = RequestMethod.POST, headers = "Accept=application/json")
   public
   @ResponseBody
-  User create(@RequestBody User user) throws UnprocessableEntityException {
+  UserDTO create(@RequestBody UserDTO userDTO) throws UnprocessableEntityException {
     try {
-      return userService.create(user);
+      return userService.create(userDTO);
     } catch (UnprocessableEntityException e) {
       LOGGER.error("Error", e.getMessage());
       throw e;
