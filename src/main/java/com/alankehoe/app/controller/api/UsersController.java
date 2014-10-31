@@ -61,10 +61,7 @@ public class UsersController extends BaseController {
   User update(@PathVariable("id") int id, @RequestBody User user) throws UnprocessableEntityException, RecordNotFoundException {
     try {
       return userService.update(id, user);
-    } catch (UnprocessableEntityException e) {
-      LOGGER.error("Error", e.getMessage());
-      throw e;
-    } catch (RecordNotFoundException e) {
+    } catch (UnprocessableEntityException | RecordNotFoundException e) {
       LOGGER.error("Error", e.getMessage());
       throw e;
     }
