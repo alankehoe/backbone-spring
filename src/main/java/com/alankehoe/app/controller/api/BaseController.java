@@ -1,5 +1,6 @@
 package com.alankehoe.app.controller.api;
 
+import com.alankehoe.app.controller.ApplicationController;
 import com.alankehoe.app.exception.RecordNotFoundException;
 import com.alankehoe.app.exception.UnprocessableEntityException;
 import com.alankehoe.app.service.UserService;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 @RequestMapping("/api")
-public class BaseController {
+public class BaseController extends ApplicationController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
 
