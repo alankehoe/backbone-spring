@@ -1,16 +1,12 @@
-package com.alankehoe.controllers.api;
+package com.alankehoe.app.controller.api;
 
-import com.alankehoe.model.dto.UserDTO;
-import com.alankehoe.exceptions.RecordNotFoundException;
-import com.alankehoe.exceptions.UnprocessableEntityException;
+import com.alankehoe.app.exception.RecordNotFoundException;
+import com.alankehoe.app.exception.UnprocessableEntityException;
+import com.alankehoe.app.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,7 +22,7 @@ public class UsersController extends BaseController {
   @RequestMapping(value = "/users", method = RequestMethod.GET, headers = "Accept=application/json")
   public
   @ResponseBody
-  List<UserDTO> index() throws RecordNotFoundException {
+  List<User> index() throws RecordNotFoundException {
     try {
       return userService.all();
     } catch (RecordNotFoundException e) {
@@ -38,7 +34,7 @@ public class UsersController extends BaseController {
   @RequestMapping(value = "/users/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
   public
   @ResponseBody
-  UserDTO show(@PathVariable("id") int id) throws RecordNotFoundException {
+  User show(@PathVariable("id") int id) throws RecordNotFoundException {
     try {
       return userService.find(id);
     } catch (RecordNotFoundException e) {
@@ -50,10 +46,25 @@ public class UsersController extends BaseController {
   @RequestMapping(value = "/users", method = RequestMethod.POST, headers = "Accept=application/json")
   public
   @ResponseBody
-  UserDTO create(@RequestBody UserDTO userDTO) throws UnprocessableEntityException {
+  User create(@RequestBody User user) throws UnprocessableEntityException {
     try {
-      return userService.create(userDTO);
+      return userService.create(user);
     } catch (UnprocessableEntityException e) {
+      LOGGER.error("Error", e.getMessage());
+      throw e;
+    }
+  }
+
+  @RequestMapping(value = "/users/{id}", method = RequestMethod.POST, headers = "Accept=application/json")
+  public
+  @ResponseBody
+  User update(@PathVariable("id") int id, @RequestBody User user) throws UnprocessableEntityException, RecordNotFoundException {
+    try {
+      return userService.update(id, user);
+    } catch (UnprocessableEntityException e) {
+      LOGGER.error("Error", e.getMessage());
+      throw e;
+    } catch (RecordNotFoundException e) {
       LOGGER.error("Error", e.getMessage());
       throw e;
     }

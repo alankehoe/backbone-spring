@@ -1,4 +1,4 @@
-package com.alankehoe.exceptions;
+package com.alankehoe.app.exception;
 
 /**
  * Created by alan on 10/10/2014.

@@ -1,4 +1,4 @@
-package com.alankehoe.model.dto;
+package com.alankehoe.app.model;
 
 import java.util.Objects;
 
@@ -6,10 +6,20 @@ import java.util.Objects;
  * Created by alan on 10/10/2014.
  */
 
-public class UserDTO {
+public class User {
+
+  private int id;
   private String firstName;
   private String lastName;
   private int age;
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
 
   public String getFirstName() {
     return firstName;
@@ -37,7 +47,7 @@ public class UserDTO {
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, lastName, age);
+    return Objects.hash(id, firstName, lastName, age);
   }
 
   @Override
@@ -48,9 +58,7 @@ public class UserDTO {
     if (obj == null || getClass() != obj.getClass()) {
       return false;
     }
-    final UserDTO other = (UserDTO) obj;
-    return Objects.equals(this.firstName, other.firstName) &&
-        Objects.equals(this.lastName, other.lastName) &&
-        Objects.equals(this.age, other.age);
+    final User other = (User) obj;
+    return Objects.equals(this.id, other.id) && Objects.equals(this.firstName, other.firstName) && Objects.equals(this.lastName, other.lastName) && Objects.equals(this.age, other.age);
   }
 }
