@@ -27,7 +27,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User find(UUID id) throws RecordNotFoundException {
-        return mockUser();
+        User user = mockUser();
+        user.setId(id);
+        return user;
     }
 
     @Override
