@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Created by alan on 10/10/2014.
@@ -19,8 +20,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public List<User> all() throws RecordNotFoundException {
     List<User> users = Lists.newArrayList();
-    for (int i = 0; i < 100; i++)
-      users.add(mockUser(i));
+    IntStream.range(0, 100).forEach((i -> users.add(mockUser(i))));
     return users;
   }
 
