@@ -15,55 +15,63 @@ import java.util.List;
  */
 
 @Controller
-public class UsersController extends BaseController {
+public class UsersController extends BaseController implements RestController<User> {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(UsersController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UsersController.class);
 
-  @RequestMapping(value = "/users", method = RequestMethod.GET, headers = "Accept=application/json")
-  public
-  @ResponseBody
-  List<User> index() throws RecordNotFoundException {
-    try {
-      return userService.all();
-    } catch (RecordNotFoundException e) {
-      LOGGER.error("Error", e.getMessage());
-      throw e;
+    @RequestMapping(value = "/users", method = RequestMethod.GET, headers = "Accept=application/json")
+    public
+    @ResponseBody
+    List<User> index() throws RecordNotFoundException {
+        try {
+            return userService.all();
+        } catch (RecordNotFoundException e) {
+            LOGGER.error("Error", e.getMessage());
+            throw e;
+        }
     }
-  }
 
-  @RequestMapping(value = "/users/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-  public
-  @ResponseBody
-  User show(@PathVariable("id") int id) throws RecordNotFoundException {
-    try {
-      return userService.find(id);
-    } catch (RecordNotFoundException e) {
-      LOGGER.error("Error", e.getMessage());
-      throw e;
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public
+    @ResponseBody
+    User show(@PathVariable("id") int id) throws RecordNotFoundException {
+        try {
+            return userService.find(id);
+        } catch (RecordNotFoundException e) {
+            LOGGER.error("Error", e.getMessage());
+            throw e;
+        }
     }
-  }
 
-  @RequestMapping(value = "/users", method = RequestMethod.POST, headers = "Accept=application/json")
-  public
-  @ResponseBody
-  User create(@RequestBody User user) throws UnprocessableEntityException {
-    try {
-      return userService.create(user);
-    } catch (UnprocessableEntityException e) {
-      LOGGER.error("Error", e.getMessage());
-      throw e;
+    @RequestMapping(value = "/users", method = RequestMethod.POST, headers = "Accept=application/json")
+    public
+    @ResponseBody
+    User create(@RequestBody User user) throws UnprocessableEntityException {
+        try {
+            return userService.create(user);
+        } catch (UnprocessableEntityException e) {
+            LOGGER.error("Error", e.getMessage());
+            throw e;
+        }
     }
-  }
 
-  @RequestMapping(value = "/users/{id}", method = RequestMethod.POST, headers = "Accept=application/json")
-  public
-  @ResponseBody
-  User update(@PathVariable("id") int id, @RequestBody User user) throws UnprocessableEntityException, RecordNotFoundException {
-    try {
-      return userService.update(id, user);
-    } catch (UnprocessableEntityException | RecordNotFoundException e) {
-      LOGGER.error("Error", e.getMessage());
-      throw e;
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.POST, headers = "Accept=application/json")
+    public
+    @ResponseBody
+    User update(@PathVariable("id") int id, @RequestBody User user) throws UnprocessableEntityException, RecordNotFoundException {
+        try {
+            return userService.update(id, user);
+        } catch (UnprocessableEntityException | RecordNotFoundException e) {
+            LOGGER.error("Error", e.getMessage());
+            throw e;
+        }
     }
-  }
+
+    @Override
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
+    public
+    @ResponseBody
+    User destroy(@PathVariable("id") int id) throws RecordNotFoundException {
+        return null;
+    }
 }
