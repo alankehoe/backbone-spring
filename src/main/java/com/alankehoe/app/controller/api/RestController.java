@@ -20,4 +20,5 @@ public interface RestController<T> {
     public T update(UUID id, T object) throws UnprocessableEntityException, RecordNotFoundException;
 
     public T destroy(UUID id) throws RecordNotFoundException;
+
 }

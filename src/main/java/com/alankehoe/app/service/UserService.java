@@ -12,6 +12,7 @@ import java.util.UUID;
  */
 
 public interface UserService {
+
     public List<User> all() throws RecordNotFoundException;
 
     public User find(UUID id) throws RecordNotFoundException;
@@ -21,4 +22,5 @@ public interface UserService {
     public User update(UUID id, User user) throws UnprocessableEntityException, RecordNotFoundException;
 
     public User destroy(UUID id) throws RecordNotFoundException;
+
 }
