@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by alan on 10/10/2014.
@@ -19,10 +20,10 @@ public class UsersController extends BaseController implements RestController<Us
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UsersController.class);
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET, headers = "Accept=application/json")
-    public
+    @Override
     @ResponseBody
-    List<User> index() throws RecordNotFoundException {
+    @RequestMapping(value = "/users", method = RequestMethod.GET, headers = "Accept=application/json")
+    public List<User> index() throws RecordNotFoundException {
         try {
             return userService.all();
         } catch (RecordNotFoundException e) {
@@ -31,10 +32,10 @@ public class UsersController extends BaseController implements RestController<Us
         }
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-    public
+    @Override
     @ResponseBody
-    User show(@PathVariable("id") int id) throws RecordNotFoundException {
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public User show(@PathVariable("id") UUID id) throws RecordNotFoundException {
         try {
             return userService.find(id);
         } catch (RecordNotFoundException e) {
@@ -43,10 +44,10 @@ public class UsersController extends BaseController implements RestController<Us
         }
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST, headers = "Accept=application/json")
-    public
+    @Override
     @ResponseBody
-    User create(@RequestBody User user) throws UnprocessableEntityException {
+    @RequestMapping(value = "/users", method = RequestMethod.POST, headers = "Accept=application/json")
+    public User create(@RequestBody User user) throws UnprocessableEntityException {
         try {
             return userService.create(user);
         } catch (UnprocessableEntityException e) {
@@ -55,10 +56,10 @@ public class UsersController extends BaseController implements RestController<Us
         }
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.POST, headers = "Accept=application/json")
-    public
+    @Override
     @ResponseBody
-    User update(@PathVariable("id") int id, @RequestBody User user) throws UnprocessableEntityException, RecordNotFoundException {
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.POST, headers = "Accept=application/json")
+    public User update(@PathVariable("id") UUID id, @RequestBody User user) throws UnprocessableEntityException, RecordNotFoundException {
         try {
             return userService.update(id, user);
         } catch (UnprocessableEntityException | RecordNotFoundException e) {
@@ -68,10 +69,9 @@ public class UsersController extends BaseController implements RestController<Us
     }
 
     @Override
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
-    public
     @ResponseBody
-    User destroy(@PathVariable("id") int id) throws RecordNotFoundException {
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
+    public User destroy(@PathVariable("id") UUID id) throws RecordNotFoundException {
         return null;
     }
 }

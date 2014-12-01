@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.IntStream;
 
 /**
@@ -17,39 +18,39 @@ import java.util.stream.IntStream;
 @Service
 public class UserServiceImpl implements UserService {
 
-  @Override
-  public List<User> all() throws RecordNotFoundException {
-    List<User> users = Lists.newArrayList();
-    IntStream.range(0, 100).forEach((i -> users.add(mockUser(i))));
-    return users;
-  }
+    @Override
+    public List<User> all() throws RecordNotFoundException {
+        List<User> users = Lists.newArrayList();
+        IntStream.range(0, 100).forEach((i -> users.add(mockUser())));
+        return users;
+    }
 
-  @Override
-  public User find(int id) throws RecordNotFoundException {
-    return mockUser(id);
-  }
+    @Override
+    public User find(UUID id) throws RecordNotFoundException {
+        return mockUser();
+    }
 
-  @Override
-  public User create(User user) throws UnprocessableEntityException {
-    return user;
-  }
+    @Override
+    public User create(User user) throws UnprocessableEntityException {
+        return user;
+    }
 
-  @Override
-  public User update(int id, User user) throws UnprocessableEntityException, RecordNotFoundException {
-    return user;
-  }
+    @Override
+    public User update(UUID id, User user) throws UnprocessableEntityException, RecordNotFoundException {
+        return user;
+    }
 
-  @Override
-  public User destroy(int id) throws RecordNotFoundException {
-    return mockUser(id);
-  }
+    @Override
+    public User destroy(UUID id) throws RecordNotFoundException {
+        return mockUser();
+    }
 
-  private User mockUser(int id) {
-    User user = new User();
-    user.setId(id);
-    user.setFirstName("alan");
-    user.setLastName("kehoe");
-    user.setAge(23);
-    return user;
-  }
+    private User mockUser() {
+        User user = new User();
+        user.setId(UUID.randomUUID());
+        user.setFirstName("alan");
+        user.setLastName("kehoe");
+        user.setAge(23);
+        return user;
+    }
 }
