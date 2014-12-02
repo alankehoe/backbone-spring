@@ -3,7 +3,9 @@ package com.alankehoe.app.controller.api;
 import com.alankehoe.app.controller.ApplicationController;
 import com.alankehoe.app.exception.RecordNotFoundException;
 import com.alankehoe.app.exception.UnprocessableEntityException;
-import com.alankehoe.app.service.UserService;
+import com.alankehoe.app.model.Group;
+import com.alankehoe.app.model.User;
+import com.alankehoe.app.service.ActiveRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,9 @@ public class BaseController extends ApplicationController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
 
     @Autowired
-    protected UserService userService;
+    protected ActiveRecord<User> userService;
+    @Autowired
+    protected ActiveRecord<Group> groupService;
 
     /**
      * The following code is for catching exceptions that have been thrown from a controller
