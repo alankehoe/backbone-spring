@@ -41,7 +41,7 @@ public class BaseController extends ApplicationController {
     @ExceptionHandler({RecordNotFoundException.class})
     public String handleRecordNotFoundException() {
         LOGGER.error("The requested resource could not be found");
-        return String.format("{'code': %d, 'message': '%s'}", 404, "The requested resource could not be found");
+        return String.format("{'code': %d, 'message': '%s'}", HttpStatus.NOT_FOUND.value(), "The requested resource could not be found");
     }
 
     @ResponseBody
@@ -49,6 +49,6 @@ public class BaseController extends ApplicationController {
     @ExceptionHandler({UnprocessableEntityException.class})
     public String handleUnprocessableEntityException() {
         LOGGER.error("unprocessable entity provided");
-        return String.format("{'code': %d, 'message': '%s'}", 422, "unprocessable entity provided");
+        return String.format("{'code': %d, 'message': '%s'}", HttpStatus.UNPROCESSABLE_ENTITY.value(), "unprocessable entity provided");
     }
 }
